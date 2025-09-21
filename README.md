@@ -17,7 +17,6 @@ Laravel 10.x ile geliştirilmiştir.
 
 ---
 
-
 ## Kurulum
 
 ### 1. Depoyu klonla
@@ -25,18 +24,38 @@ Laravel 10.x ile geliştirilmiştir.
 ```bash
 git clone https://github.com/cangokhan/auto-sms-app.git
 cd auto-sms-app
+```
 
 ### 2. Bağımlılıklar
 
 ```bash
 composer install
+```
 
 ### 3. .env
 ```bash
 cp .env.example .env
 php artisan key:generate
+```
 
 ### 4. .env oluştur
 ```bash
 cp .env.example .env
 php artisan key:generate
+```
+
+### 5. .env ayarları 
+```env
+MESSAGE_WEBHOOK_URL=https://webhook.site/216ffc24-73ff-4f2c-82e1-2953ae64ad03
+MESSAGE_AUTH_KEY=INS.me1x9uMcyYGlhKKQVPoc.bO3j9aZwRTOcA2Ywo
+MESSAGE_CHAR_LIMIT=160
+MESSAGE_SEND_INTERVAL=5
+MESSAGE_BATCH_SIZE=2
+L5_SWAGGER_GENERATE_ALWAYS=true
+
+REDIS_CLIENT=predis
+REDIS_HOST=127.0.0.1
+REDIS_PORT=6379
+REDIS_PASSWORD=null
+REDIS_DB=0
+```
