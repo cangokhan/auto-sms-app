@@ -69,9 +69,71 @@ docker run --name redis -p 6379:6379 -d redis
 
 ## Queue
 
-Queue tabloları
+Queue tabloları migration
 
 ```bash
 php artisan queue:table
 php artisan migrate
 ```
+
+Queue Worker çalıştırma
+
+```bash
+php artisan queue:work
+```
+
+
+## Artisan Komutları
+
+### Gönderilmeyi bekleyen mesajları dispatch et
+
+
+# Tüm pending mesajlar
+```bash
+php artisan messages:dispatch
+```
+
+# Sadece belirli segmenti göndermek için (örnek: "vip")
+```bash
+php artisan messages:dispatch --segment=vip
+```
+
+## Gönderilen Mesajlar API
+
+### Gönderilen Mesajları Listele
+
+
+- Bu endpoint, **gönderilmiş (`sent`) mesajların listesini** döner.
+- Opsiyonel filtreler ile arama yapılabilir:
+  - `phone` : Belirli telefon numarasına gönderilen mesajları getirir
+  - `segment` : Belirli segmentteki mesajları filtreler
+
+**Örnek Request:**
+```bash
+GET /messages/sent?segment=vip&phone=+905551111111
+```
+
+**Örnek Response:**
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "id": 2,
+      "segment": "vip",
+      "phone": "+905551112233",
+      "name": "Ahmet Test",
+      "content": "Bu bir test mesajıdır.",
+      "status": "sent",
+      "external_message_id": "67f2f8a8-ea58-4ed0-a6f9-ff217df4d849",
+      "sent_at": "2025-09-21T13:23:12.000000Z",
+      "response_payload": {
+        "localMessageId": 2,
+        "messageId": "67f2f8a8-ea58-4ed0-a6f9-ff217df4d849",
+        "message": "Accepted"
+      },
+      "created_at": "2025-09-21T12:50:34.000000Z",
+      "updated_at": "2025-09-21T13:23:12.000000Z"
+    }
+  ]
+}
