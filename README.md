@@ -32,19 +32,13 @@ cd auto-sms-app
 composer install
 ```
 
-### 3. .env
+### 3. .env oluştur
 ```bash
 cp .env.example .env
 php artisan key:generate
 ```
 
-### 4. .env oluştur
-```bash
-cp .env.example .env
-php artisan key:generate
-```
-
-### 5. .env ayarları 
+### 4. .env ayarları 
 ```env
 MESSAGE_WEBHOOK_URL=https://webhook.site/216ffc24-73ff-4f2c-82e1-2953ae64ad03
 MESSAGE_AUTH_KEY=INS.me1x9uMcyYGlhKKQVPoc.bO3j9aZwRTOcA2Ywo
@@ -58,4 +52,26 @@ REDIS_HOST=127.0.0.1
 REDIS_PORT=6379
 REDIS_PASSWORD=null
 REDIS_DB=0
+```
+
+### 5. migration
+```bash
+php artisan migrate
+```
+
+## Docker ile Redis
+
+Redis cache kullanımı için Docker
+
+```bash
+docker run --name redis -p 6379:6379 -d redis
+```
+
+## Queue
+
+Queue tabloları
+
+```bash
+php artisan queue:table
+php artisan migrate
 ```
