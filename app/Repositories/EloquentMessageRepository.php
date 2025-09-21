@@ -11,15 +11,15 @@ class EloquentMessageRepository implements MessageRepositoryInterface
      * Gönderilmeyi bekleyen mesajları getirir
      * 
      * @param int $limit
-     * @param string|null $segment
+     * @param array $filters
      * @return Collection
      */
-    public function getPending(int $limit = 10, ?string $segment = null): Collection
+    public function getPending(int $limit = 10, array $filters = []): Collection
     {
         $query = Message::status('pending');
         
-        if ($segment) {
-            $query->segment($segment);
+        if (!empty($filters['segment'])) {
+            $query->segment($filters['segment']);
         }
 
         return $query->limit($limit)->get();
